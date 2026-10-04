@@ -1,7 +1,9 @@
 import { useEffect, useReducer } from 'react';
 import {
+  playDeselect,
   playError,
   playReveal,
+  playSelect,
   playSuccess,
   playWarning,
 } from 'src/services/sound';
@@ -268,6 +270,11 @@ export function useGame() {
   }
 
   function toggle(index: number): void {
+    if (state.selection.includes(index)) {
+      playDeselect();
+    } else {
+      playSelect();
+    }
     dispatch({ type: 'TOGGLE', index });
   }
 

@@ -1,7 +1,9 @@
 import { act, renderHook } from '@testing-library/react';
 import {
+  playDeselect,
   playError,
   playReveal,
+  playSelect,
   playSuccess,
   playWarning,
 } from 'src/services/sound';
@@ -339,6 +341,26 @@ describe('useGame', () => {
     });
 
     expect(result.current.state.phase).toBe('input');
+  });
+
+  it('plays a cue for each pick and unpick', () => {
+    const result = startRun('classic');
+    act(() => {
+      vi.advanceTimersByTime(REVEAL);
+    });
+
+    act(() => {
+      result.current.toggle(0);
+      result.current.toggle(1);
+    });
+    expect(playSelect).toHaveBeenCalledTimes(2);
+    expect(playDeselect).not.toHaveBeenCalled();
+
+    act(() => {
+      result.current.toggle(0);
+    });
+    expect(playDeselect).toHaveBeenCalledOnce();
+    expect(result.current.state.selection).toEqual([1]);
   });
 
   it('auto-checks once the target count is reached', () => {
