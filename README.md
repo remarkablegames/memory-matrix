@@ -2,7 +2,7 @@
 
 [![build](https://github.com/remarkablegames/memory-matrix/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/memory-matrix/actions/workflows/build.yml)
 [![test](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/remarkablegames/memory-matrix/graph/badge.svg?token=DEr2eVeqdz)](https://codecov.io/gh/remarkablegames/memory-matrix)
+[![codecov](https://codecov.io/gh/remarkablegames/memory-matrix/graph/badge.svg?token=IqRfA9X3VC)](https://codecov.io/gh/remarkablegames/memory-matrix)
 
 🧩 Train your brain with **Memory Matrix**.
 
