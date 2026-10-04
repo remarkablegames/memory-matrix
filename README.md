@@ -1,18 +1,32 @@
-# vite-react-tailwind-template
+# Memory Matrix
 
-[![build](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/build.yml)
-[![test](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/remarkablemark/vite-react-tailwind-template/graph/badge.svg?token=DEr2eVeqdz)](https://codecov.io/gh/remarkablemark/vite-react-tailwind-template)
+[![build](https://github.com/remarkablegames/memory-matrix/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/memory-matrix/actions/workflows/build.yml)
+[![test](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/remarkablegames/memory-matrix/graph/badge.svg?token=DEr2eVeqdz)](https://codecov.io/gh/remarkablegames/memory-matrix)
 
-⚡ Vite React Tailwind Template
+🧩 Train your brain with **Memory Matrix**.
+
+**Memory Matrix** is a fast-paced brain-training game that challenges you to remember and recreate patterns on a changing grid. Test your focus, sharpen your memory, and see how far you can go as the matrix grows more challenging.
+
+## Play
+
+Play in your browser:
+
+- [remarkablegames](https://remarkablegames.org/memory-matrix/)
+
+Or download for desktop:
+
+- [Windows](https://github.com/remarkablegames/memory-matrix/releases/latest/download/windows.zip)
+- [macOS](https://github.com/remarkablegames/memory-matrix/releases/latest/download/macos.zip)
+- [Linux](https://github.com/remarkablegames/memory-matrix/releases/latest/download/linux.zip)
 
 ## Install
 
 Clone the repository:
 
 ```sh
-git clone https://github.com/remarkablemark/vite-react-tailwind-template.git
-cd vite-react-tailwind-template
+git clone https://github.com/remarkablemark/memory-matrix.git
+cd memory-matrix
 ```
 
 Install the dependencies:
