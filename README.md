@@ -20,6 +20,25 @@ Or download for desktop:
 - [macOS](https://github.com/remarkablegames/memory-matrix/releases/latest/download/macos.zip)
 - [Linux](https://github.com/remarkablegames/memory-matrix/releases/latest/download/linux.zip)
 
+## How to Play
+
+A set of tiles will light up briefly. Then, tap the tiles from memory.
+
+1. Watch the pattern appear.
+2. Tap the tiles you remember. Your answer is automatically checked once you've selected the same number of tiles that lit up.
+3. The grid size and pattern difficulty increase as you clear rounds.
+
+Choose a mode from the menu:
+
+- **Classic**: One mistake ends the run.
+- **Timed**: Start with 60 seconds. Each cleared round adds time, with harder rounds rewarding extra time. A mistake costs time instead of ending the run.
+
+### Accessibility
+
+- Fully playable with a keyboard. Use **Tab** to navigate cells, the arrow keys to move, and **Enter** or **Space** to select.
+- Screen readers announce the target count—for example, "Recall 5 tiles"—as well as the current round and remaining time.
+- Dark mode follows your system preference, and animations are disabled when reduced motion is enabled.
+
 ## Install
 
 Clone the repository:
