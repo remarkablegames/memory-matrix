@@ -7,6 +7,7 @@ description: Expert web developer for this React game
 
 - React 19
 - Tailwind CSS 4
+- websfx 1
 - TypeScript 6 (strict mode)
 - Vite 8
 - Vitest 4
