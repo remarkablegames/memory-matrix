@@ -1,5 +1,4 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { setVolume } from 'src/services/sound';
 import {
   FEEDBACK_CORRECT_MS,
   FEEDBACK_WRONG_MS,
@@ -9,10 +8,11 @@ import {
   TICK_MS,
 } from 'src/utils/difficulty';
 import { STORAGE_KEY } from 'src/utils/storage';
+import { configure } from 'websfx';
 
 import { App } from '.';
 
-vi.mock('src/services/sound');
+vi.mock('websfx');
 vi.mock('src/utils/pattern', () => ({
   createPattern: vi.fn(() => [0, 1, 2]),
 }));
@@ -67,7 +67,7 @@ describe('App', () => {
   it('applies the stored volume on mount', () => {
     render(<App />);
 
-    expect(setVolume).toHaveBeenCalledWith(0.5);
+    expect(configure).toHaveBeenCalledWith({ volume: 0.5 });
     expect(
       screen.getByRole('heading', { level: 1, name: 'Memory Matrix' }),
     ).toBeInTheDocument();

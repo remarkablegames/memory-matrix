@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useGame } from 'src/hooks/useGame';
-import { setVolume } from 'src/services/sound';
 import { loadSettings } from 'src/utils/storage';
+import { configure } from 'websfx';
 
 import { Game } from '../Game';
 import { GameOver } from '../GameOver';
@@ -11,7 +11,7 @@ export function App() {
   const { state, start, toggle, again, toMenu } = useGame();
 
   useEffect(() => {
-    setVolume(loadSettings().volume);
+    configure({ volume: loadSettings().volume });
   }, []);
 
   const playing = state.phase !== 'menu' && state.phase !== 'gameover';

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useBestScore } from 'src/hooks/useBestScore';
-import { playSuccess } from 'src/services/sound';
 import type { GameOverReason, Mode } from 'src/types/game';
+import { success } from 'websfx';
 
 import { Confetti } from '../Confetti';
 
@@ -36,7 +36,7 @@ export function GameOver({
 
   useEffect(() => {
     if (record) {
-      playSuccess();
+      success();
     }
   }, [record]);
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { setVolume } from 'src/services/sound';
 import type { Mode } from 'src/types/game';
 import { loadSettings, saveSettings } from 'src/utils/storage';
+import { configure } from 'websfx';
 
 export interface MenuProps {
   onStart: (mode: Mode) => void;
@@ -40,7 +40,7 @@ export function Menu({ onStart }: MenuProps) {
   function toggleSound(): void {
     const volume = soundOn ? 0 : 1;
     saveSettings({ volume });
-    setVolume(volume);
+    configure({ volume });
     setSettings((previous) => ({ ...previous, volume }));
   }
 

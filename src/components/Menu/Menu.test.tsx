@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { setVolume } from 'src/services/sound';
 import { STORAGE_KEY } from 'src/utils/storage';
+import { configure } from 'websfx';
 
 import { Menu } from './Menu';
 
-vi.mock('src/services/sound');
+vi.mock('websfx');
 
 function seedSettings(best: { classic: number; timed: number }, volume = 0.5) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({ best, volume }));
@@ -81,14 +81,14 @@ describe('Menu', () => {
 
     await user.click(toggle);
     expect(toggle).toHaveAttribute('aria-checked', 'false');
-    expect(setVolume).toHaveBeenLastCalledWith(0);
+    expect(configure).toHaveBeenLastCalledWith({ volume: 0 });
     expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject(
       { volume: 0 },
     );
 
     await user.click(toggle);
     expect(toggle).toHaveAttribute('aria-checked', 'true');
-    expect(setVolume).toHaveBeenLastCalledWith(1);
+    expect(configure).toHaveBeenLastCalledWith({ volume: 1 });
     expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject(
       { volume: 1 },
     );

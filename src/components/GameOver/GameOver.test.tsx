@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { playSuccess } from 'src/services/sound';
 import { STORAGE_KEY } from 'src/utils/storage';
+import { success } from 'websfx';
 
 import { GameOver } from './GameOver';
 
-vi.mock('src/services/sound');
+vi.mock('websfx');
 
 interface GameOverOverrides {
   mode?: 'classic' | 'timed';
@@ -61,7 +61,7 @@ describe('GameOver', () => {
 
     expect(screen.getByText('New record!')).toBeInTheDocument();
     expect(screen.getByText('Best: 4')).toBeInTheDocument();
-    expect(playSuccess).toHaveBeenCalled();
+    expect(success).toHaveBeenCalled();
 
     const stored: unknown = JSON.parse(
       localStorage.getItem(STORAGE_KEY) ?? '{}',

@@ -1,12 +1,4 @@
 import { useEffect, useReducer } from 'react';
-import {
-  playDeselect,
-  playError,
-  playReveal,
-  playSelect,
-  playSuccess,
-  playWarning,
-} from 'src/services/sound';
 import type { Action, GameState, Mode } from 'src/types/game';
 import {
   FEEDBACK_CORRECT_MS,
@@ -22,6 +14,14 @@ import {
   WARNING_MS,
 } from 'src/utils/difficulty';
 import { createPattern } from 'src/utils/pattern';
+import {
+  deselect,
+  error,
+  notification,
+  select,
+  success,
+  warning,
+} from 'websfx';
 
 import { useTimer } from './useTimer';
 
@@ -233,23 +233,23 @@ export function useGame() {
   // Sound cues for each phase transition.
   useEffect(() => {
     if (state.phase === 'showing') {
-      playReveal();
+      notification();
     }
   }, [state.phase]);
 
   useEffect(() => {
     if (state.phase === 'feedback') {
       if (state.result === 'correct') {
-        playSuccess();
+        success();
       } else {
-        playError();
+        error();
       }
     }
   }, [state.phase, state.result]);
 
   useEffect(() => {
     if (state.phase === 'gameover' && state.reason === 'timeout') {
-      playError();
+      error();
     }
   }, [state.phase, state.reason]);
 
@@ -259,7 +259,7 @@ export function useGame() {
       return;
     }
     if (state.timeLeft <= WARNING_MS && state.timeLeft > WARNING_MS - TICK_MS) {
-      playWarning();
+      warning();
     }
   }, [state.timeLeft]);
 
@@ -271,9 +271,9 @@ export function useGame() {
 
   function toggle(index: number): void {
     if (state.selection.includes(index)) {
-      playDeselect();
+      deselect();
     } else {
-      playSelect();
+      select();
     }
     dispatch({ type: 'TOGGLE', index });
   }

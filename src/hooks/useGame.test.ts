@@ -1,13 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
 import {
-  playDeselect,
-  playError,
-  playReveal,
-  playSelect,
-  playSuccess,
-  playWarning,
-} from 'src/services/sound';
-import {
   FEEDBACK_CORRECT_MS,
   FEEDBACK_WRONG_MS,
   getRevealDuration,
@@ -16,10 +8,18 @@ import {
   START_TIME_MS,
   TICK_MS,
 } from 'src/utils/difficulty';
+import {
+  deselect,
+  error,
+  notification,
+  select,
+  success,
+  warning,
+} from 'websfx';
 
 import { gameReducer, INITIAL_STATE, useGame } from './useGame';
 
-vi.mock('src/services/sound');
+vi.mock('websfx');
 vi.mock('src/utils/pattern', () => ({
   createPattern: vi.fn(() => [0, 1, 2]),
 }));
@@ -330,7 +330,7 @@ describe('useGame', () => {
       gridSize: 3,
       pattern: [0, 1, 2],
     });
-    expect(playReveal).toHaveBeenCalledOnce();
+    expect(notification).toHaveBeenCalledOnce();
   });
 
   it('opens the input phase when the reveal window ends', () => {
@@ -353,13 +353,13 @@ describe('useGame', () => {
       result.current.toggle(0);
       result.current.toggle(1);
     });
-    expect(playSelect).toHaveBeenCalledTimes(2);
-    expect(playDeselect).not.toHaveBeenCalled();
+    expect(select).toHaveBeenCalledTimes(2);
+    expect(deselect).not.toHaveBeenCalled();
 
     act(() => {
       result.current.toggle(0);
     });
-    expect(playDeselect).toHaveBeenCalledOnce();
+    expect(deselect).toHaveBeenCalledOnce();
     expect(result.current.state.selection).toEqual([1]);
   });
 
@@ -382,7 +382,7 @@ describe('useGame', () => {
 
     expect(result.current.state.phase).toBe('feedback');
     expect(result.current.state.result).toBe('correct');
-    expect(playSuccess).toHaveBeenCalledOnce();
+    expect(success).toHaveBeenCalledOnce();
   });
 
   it('cancels the pending check when a cell is unpicked', () => {
@@ -433,7 +433,7 @@ describe('useGame', () => {
       round: 2,
       score: 1,
     });
-    expect(playReveal).toHaveBeenCalledTimes(2);
+    expect(notification).toHaveBeenCalledTimes(2);
   });
 
   it('ends a classic run on a wrong pattern', () => {
@@ -451,7 +451,7 @@ describe('useGame', () => {
       vi.advanceTimersByTime(LOCK_IN_MS);
     });
     expect(result.current.state.result).toBe('wrong');
-    expect(playError).toHaveBeenCalledOnce();
+    expect(error).toHaveBeenCalledOnce();
 
     act(() => {
       vi.advanceTimersByTime(FEEDBACK_WRONG_MS);
@@ -534,7 +534,7 @@ describe('useGame', () => {
     expect(result.current.state.phase).toBe('gameover');
     expect(result.current.state.reason).toBe('timeout');
     expect(result.current.state.timeLeft).toBe(0);
-    expect(playError).toHaveBeenCalled();
+    expect(error).toHaveBeenCalled();
   });
 
   it('warns when the clock drops under ten seconds', () => {
@@ -544,17 +544,17 @@ describe('useGame', () => {
     act(() => {
       vi.advanceTimersByTime(untilWarning);
     });
-    expect(playWarning).not.toHaveBeenCalled();
+    expect(warning).not.toHaveBeenCalled();
 
     act(() => {
       vi.advanceTimersByTime(TICK_MS);
     });
-    expect(playWarning).toHaveBeenCalledOnce();
+    expect(warning).toHaveBeenCalledOnce();
 
     act(() => {
       vi.advanceTimersByTime(TICK_MS * 5);
     });
-    expect(playWarning).toHaveBeenCalledOnce();
+    expect(warning).toHaveBeenCalledOnce();
   });
 
   it('does not run a clock in classic mode', () => {
