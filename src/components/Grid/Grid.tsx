@@ -1,22 +1,8 @@
 import type { KeyboardEvent } from 'react';
 import { useRef } from 'react';
 import type { Phase, Result } from 'src/types/game';
+import { canHover } from 'src/utils/media';
 import { type } from 'websfx';
-
-const HOVER_SOUND_QUERY = '(hover: hover) and (pointer: fine)';
-
-/**
- * Reports whether the device has a real hovering pointer. Touch devices
- * emulate :hover on tap, which would double up with the click cue.
- *
- * @returns Whether hover cues should play.
- */
-function canHover(): boolean {
-  return (
-    typeof window.matchMedia === 'function' &&
-    window.matchMedia(HOVER_SOUND_QUERY).matches
-  );
-}
 
 export interface GridProps {
   gridSize: number;

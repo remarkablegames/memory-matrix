@@ -3,6 +3,8 @@ import type { Mode } from 'src/types/game';
 import { loadSettings, saveSettings } from 'src/utils/storage';
 import { configure } from 'websfx';
 
+import { Button } from '../Button';
+
 export interface MenuProps {
   onStart: (mode: Mode) => void;
 }
@@ -17,9 +19,6 @@ const MODES: { mode: Mode; title: string; blurb: string }[] = [
   { mode: 'classic', title: 'Classic', blurb: 'One mistake ends the run.' },
   { mode: 'timed', title: 'Timed', blurb: 'Beat the clock.' },
 ];
-
-const MODE_CLASSES =
-  'w-full cursor-pointer rounded-xl border-2 border-slate-300 bg-slate-50 p-4 text-center transition hover:border-sky-500 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:hover:border-sky-400';
 
 const SWITCH_TRACK =
   'relative h-6 w-11 shrink-0 rounded-full transition-colors';
@@ -68,10 +67,9 @@ export function Menu({ onStart }: MenuProps) {
 
       <div className="grid gap-3 sm:grid-cols-2">
         {MODES.map(({ mode, title, blurb }) => (
-          <button
+          <Button
             key={mode}
-            type="button"
-            className={MODE_CLASSES}
+            variant="mode"
             onClick={() => {
               onStart(mode);
             }}
@@ -85,15 +83,14 @@ export function Menu({ onStart }: MenuProps) {
             <span className="mt-2 block text-sm font-medium text-sky-600 dark:text-sky-400">
               Best: {settings.best[mode]}
             </span>
-          </button>
+          </Button>
         ))}
       </div>
 
-      <button
-        type="button"
+      <Button
+        variant="switch"
         role="switch"
         aria-checked={soundOn}
-        className="mx-auto flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 dark:text-slate-300"
         onClick={toggleSound}
       >
         <span>Sound</span>
@@ -105,7 +102,7 @@ export function Menu({ onStart }: MenuProps) {
             className={`${SWITCH_KNOB} ${soundOn ? 'translate-x-5' : ''}`}
           />
         </span>
-      </button>
+      </Button>
     </section>
   );
 }

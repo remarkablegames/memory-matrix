@@ -3,6 +3,7 @@ import { useBestScore } from 'src/hooks/useBestScore';
 import type { GameOverReason, Mode } from 'src/types/game';
 import { success } from 'websfx';
 
+import { Button } from '../Button';
 import { Confetti } from '../Confetti';
 
 export interface GameOverProps {
@@ -12,13 +13,6 @@ export interface GameOverProps {
   onAgain: () => void;
   onMenu: () => void;
 }
-
-const BUTTON_BASE =
-  'cursor-pointer rounded-xl border-2 px-6 py-3 font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 active:translate-y-px';
-
-const PRIMARY_BUTTON = `${BUTTON_BASE} border-sky-700 bg-sky-700 text-white hover:border-sky-600 hover:bg-sky-600 dark:border-sky-700 dark:bg-sky-700 dark:text-white dark:hover:border-sky-600 dark:hover:bg-sky-600`;
-
-const SECONDARY_BUTTON = `${BUTTON_BASE} border-slate-300 bg-slate-50 text-slate-700 hover:border-sky-500 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:shadow-md`;
 
 /**
  * End-of-run screen: final score, best score, record celebration, and
@@ -76,12 +70,12 @@ export function GameOver({
       <p className="text-sm text-slate-600 dark:text-slate-400">Best: {best}</p>
 
       <div className="flex flex-wrap justify-center gap-3">
-        <button type="button" className={PRIMARY_BUTTON} onClick={onAgain}>
+        <Button variant="primary" onClick={onAgain}>
           Play again
-        </button>
-        <button type="button" className={SECONDARY_BUTTON} onClick={onMenu}>
+        </Button>
+        <Button variant="secondary" onClick={onMenu}>
           Menu
-        </button>
+        </Button>
       </div>
     </section>
   );
