@@ -12,6 +12,8 @@
 
 Play in your browser:
 
+- [Wavedash](https://wavedash.com/games/memory-matrix/)
+- [itch.io](https://remarkablegames.itch.io/memory-matrix)
 - [remarkablegames](https://remarkablegames.org/memory-matrix/)
 
 Or download for desktop:
