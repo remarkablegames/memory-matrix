@@ -15,6 +15,10 @@ export default defineConfig({
               name: 'react',
               test: /node_modules\/(react|react-dom)\//,
             },
+            {
+              name: 'websfx',
+              test: /node_modules\/websfx\//,
+            },
           ],
         },
       },
