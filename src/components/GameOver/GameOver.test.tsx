@@ -105,6 +105,25 @@ describe('GameOver', () => {
     expect(screen.getByText('Timed run')).toBeInTheDocument();
   });
 
+  it('gives the primary button a readable, conflict-free palette', () => {
+    renderGameOver();
+
+    const tokens = screen
+      .getByRole('button', { name: 'Play again' })
+      .className.split(' ');
+
+    expect(tokens).toContain('bg-sky-700');
+    expect(tokens).toContain('text-white');
+
+    // Tailwind resolves same-specificity utilities by stylesheet order, so a
+    // button must never carry two colors for the same property.
+    expect(tokens).not.toContain('bg-slate-50');
+    expect(tokens).not.toContain('text-slate-700');
+    expect(tokens).not.toContain('border-slate-300');
+    expect(tokens).not.toContain('dark:bg-slate-800');
+    expect(tokens).not.toContain('dark:text-slate-200');
+  });
+
   it('restarts the run', async () => {
     const user = userEvent.setup();
     const { onAgain } = renderGameOver();

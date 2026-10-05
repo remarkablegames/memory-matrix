@@ -13,10 +13,12 @@ export interface GameOverProps {
   onMenu: () => void;
 }
 
-const SECONDARY_BUTTON =
-  'cursor-pointer rounded-xl border-2 border-slate-300 bg-slate-50 px-6 py-3 font-semibold text-slate-700 transition hover:border-sky-500 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-sky-400';
+const BUTTON_BASE =
+  'cursor-pointer rounded-xl border-2 px-6 py-3 font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 active:translate-y-px';
 
-const PRIMARY_BUTTON = `${SECONDARY_BUTTON} border-sky-600 bg-sky-600 text-white hover:border-sky-500 hover:bg-sky-500 dark:border-sky-500 dark:bg-sky-500 dark:hover:bg-sky-400`;
+const PRIMARY_BUTTON = `${BUTTON_BASE} border-sky-700 bg-sky-700 text-white hover:border-sky-600 hover:bg-sky-600 dark:border-sky-700 dark:bg-sky-700 dark:text-white dark:hover:border-sky-600 dark:hover:bg-sky-600`;
+
+const SECONDARY_BUTTON = `${BUTTON_BASE} border-slate-300 bg-slate-50 text-slate-700 hover:border-sky-500 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:shadow-md`;
 
 /**
  * End-of-run screen: final score, best score, record celebration, and
