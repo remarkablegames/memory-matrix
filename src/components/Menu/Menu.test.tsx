@@ -1,14 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { STORAGE_KEY } from 'src/utils/storage';
-import { configure } from 'websfx';
 
 import { Menu } from './Menu';
 
-vi.mock('websfx');
-
-function seedSettings(best: { classic: number; timed: number }, volume = 0.5) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ best, volume }));
+function seedSettings(best: { classic: number; timed: number }): void {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ best, volume: 0.5 }));
 }
 
 describe('Menu', () => {
@@ -54,55 +51,5 @@ describe('Menu', () => {
     await user.click(screen.getByRole('button', { name: /timed/i }));
 
     expect(onStart).toHaveBeenCalledWith('timed');
-  });
-
-  it('shows the sound switch as on by default', () => {
-    render(<Menu onStart={vi.fn()} />);
-
-    expect(screen.getByRole('switch', { name: 'Sound' })).toBeChecked();
-  });
-
-  it('reflects a muted preference', () => {
-    seedSettings({ classic: 0, timed: 0 }, 0);
-
-    render(<Menu onStart={vi.fn()} />);
-
-    expect(screen.getByRole('switch', { name: 'Sound' })).toHaveAttribute(
-      'aria-checked',
-      'false',
-    );
-  });
-
-  it('mutes and restores sound from the switch', async () => {
-    const user = userEvent.setup();
-    render(<Menu onStart={vi.fn()} />);
-
-    const toggle = screen.getByRole('switch', { name: 'Sound' });
-
-    await user.click(toggle);
-    expect(toggle).toHaveAttribute('aria-checked', 'false');
-    expect(configure).toHaveBeenLastCalledWith({ volume: 0 });
-    expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject(
-      { volume: 0 },
-    );
-
-    await user.click(toggle);
-    expect(toggle).toHaveAttribute('aria-checked', 'true');
-    expect(configure).toHaveBeenLastCalledWith({ volume: 1 });
-    expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject(
-      { volume: 1 },
-    );
-  });
-
-  it('keeps best scores when toggling sound', async () => {
-    const user = userEvent.setup();
-    seedSettings({ classic: 7, timed: 2 });
-
-    render(<Menu onStart={vi.fn()} />);
-    await user.click(screen.getByRole('switch', { name: 'Sound' }));
-
-    expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject(
-      { best: { classic: 7, timed: 2 }, volume: 0 },
-    );
   });
 });

@@ -8,7 +8,6 @@ import {
   TICK_MS,
 } from 'src/utils/difficulty';
 import { STORAGE_KEY } from 'src/utils/storage';
-import { configure } from 'websfx';
 
 import { App } from '.';
 
@@ -73,13 +72,17 @@ describe('App', () => {
     expect(main).toHaveClass('px-2');
   });
 
-  it('applies the stored volume on mount', () => {
+  it('keeps the sound toggle on every screen', () => {
     render(<App />);
 
-    expect(configure).toHaveBeenCalledWith({ volume: 0.5 });
     expect(
       screen.getByRole('heading', { level: 1, name: 'Memory Matrix' }),
     ).toBeInTheDocument();
+    expect(screen.getByRole('switch', { name: 'Sound' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /classic/i }));
+
+    expect(screen.getByRole('switch', { name: 'Sound' })).toBeInTheDocument();
   });
 
   it('clears a full classic round and advances', () => {

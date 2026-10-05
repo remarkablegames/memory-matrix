@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import type { Mode } from 'src/types/game';
-import { loadSettings, saveSettings } from 'src/utils/storage';
-import { configure } from 'websfx';
+import { loadSettings } from 'src/utils/storage';
 
 import { Button } from '../Button';
 
@@ -20,28 +19,15 @@ const MODES: { mode: Mode; title: string; blurb: string }[] = [
   { mode: 'timed', title: 'Timed', blurb: 'Beat the clock.' },
 ];
 
-const SWITCH_TRACK =
-  'relative h-6 w-11 shrink-0 rounded-full transition-colors';
-const SWITCH_KNOB =
-  'absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform';
-
 /**
- * Title screen: how to play, mode select with best scores, and the
- * sound switch.
+ * Title screen: how to play, mode select, and per-mode best scores. Sound
+ * lives in the app-level corner toggle.
  *
  * @param props - `onStart` receives the chosen mode.
  * @returns The rendered menu.
  */
 export function Menu({ onStart }: MenuProps) {
-  const [settings, setSettings] = useState(loadSettings);
-  const soundOn = settings.volume > 0;
-
-  function toggleSound(): void {
-    const volume = soundOn ? 0 : 1;
-    saveSettings({ volume });
-    configure({ volume });
-    setSettings((previous) => ({ ...previous, volume }));
-  }
+  const [settings] = useState(loadSettings);
 
   return (
     <section className="flex w-full max-w-xl flex-col gap-8 px-6 text-center">
@@ -86,23 +72,6 @@ export function Menu({ onStart }: MenuProps) {
           </Button>
         ))}
       </div>
-
-      <Button
-        variant="switch"
-        role="switch"
-        aria-checked={soundOn}
-        onClick={toggleSound}
-      >
-        <span>Sound</span>
-        <span
-          aria-hidden="true"
-          className={`${SWITCH_TRACK} ${soundOn ? 'bg-sky-500' : 'bg-slate-300 dark:bg-slate-600'}`}
-        >
-          <span
-            className={`${SWITCH_KNOB} ${soundOn ? 'translate-x-5' : ''}`}
-          />
-        </span>
-      </Button>
     </section>
   );
 }

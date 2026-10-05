@@ -37,7 +37,7 @@ describe('Button', () => {
     ['primary', 'bg-sky-700'],
     ['secondary', 'border-slate-300'],
     ['mode', 'w-full'],
-    ['switch', 'rounded-lg'],
+    ['icon', 'rounded-full'],
   ] as const)('renders the %s variant', (variant, token) => {
     render(<Button variant={variant}>Label</Button>);
 
