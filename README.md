@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/logo.svg" width="150" alt="Memory Matrix">
+</p>
+
 # Memory Matrix
 
 [![build](https://github.com/remarkablegames/memory-matrix/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/memory-matrix/actions/workflows/build.yml)
