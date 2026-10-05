@@ -17,7 +17,7 @@ export function App() {
   const playing = state.phase !== 'menu' && state.phase !== 'gameover';
 
   return (
-    <main className="flex min-h-dvh w-full flex-col items-center justify-center gap-8 bg-white px-4 py-8 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
+    <main className="flex min-h-dvh w-full touch-manipulation flex-col items-center justify-center gap-8 bg-white px-4 py-8 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
       {state.phase === 'menu' && <Menu onStart={start} />}
       {playing && <Game state={state} onToggle={toggle} />}
       {state.phase === 'gameover' && (

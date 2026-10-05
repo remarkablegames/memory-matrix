@@ -64,6 +64,12 @@ describe('App', () => {
     vi.useRealTimers();
   });
 
+  it('suppresses double-tap zoom on the play surface', () => {
+    const { container } = render(<App />);
+
+    expect(container.querySelector('main')).toHaveClass('touch-manipulation');
+  });
+
   it('applies the stored volume on mount', () => {
     render(<App />);
 
