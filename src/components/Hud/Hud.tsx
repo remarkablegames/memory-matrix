@@ -33,17 +33,20 @@ export function Hud({ round, count, timeLeft }: HudProps) {
           </span>
         </div>
 
-        {count !== null && (
-          <div aria-live="polite" className="justify-self-center text-center">
-            <span
-              aria-hidden="true"
-              className="block text-3xl font-bold text-sky-600 dark:text-sky-400"
-            >
-              {count}
-            </span>
-            <span className="sr-only">Recall {count} tiles</span>
-          </div>
-        )}
+        {/* Always occupy the middle column so the timer never shifts. */}
+        <div role="status" className="justify-self-center text-center">
+          {count !== null && (
+            <>
+              <span
+                aria-hidden="true"
+                className="block text-3xl font-bold text-sky-600 dark:text-sky-400"
+              >
+                {count}
+              </span>
+              <span className="sr-only">Recall {count} tiles</span>
+            </>
+          )}
+        </div>
 
         {seconds !== null && (
           <div

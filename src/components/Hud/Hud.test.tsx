@@ -11,6 +11,20 @@ describe('Hud', () => {
     expect(screen.getByText('Round')).toBeInTheDocument();
   });
 
+  it('keeps the timer in the rightmost column as the count appears', () => {
+    const { rerender } = render(
+      <Hud round={2} count={null} timeLeft={30_000} />,
+    );
+
+    const row = () => screen.getByRole('timer').parentElement?.children;
+    expect(row()).toHaveLength(3);
+
+    rerender(<Hud round={2} count={5} timeLeft={30_000} />);
+
+    expect(row()).toHaveLength(3);
+    expect(row()?.[2]).toBe(screen.getByRole('timer'));
+  });
+
   it('shows the bare target count during input', () => {
     render(<Hud round={1} count={5} timeLeft={null} />);
 
@@ -22,6 +36,8 @@ describe('Hud', () => {
     render(<Hud round={1} count={null} timeLeft={null} />);
 
     expect(screen.queryByText(/recall/i)).not.toBeInTheDocument();
+    // The live region stays mounted so the count is announced when it lands.
+    expect(screen.getByRole('status')).toBeEmptyDOMElement();
   });
 
   it('renders no clock in classic mode', () => {
