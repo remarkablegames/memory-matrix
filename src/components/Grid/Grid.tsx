@@ -22,7 +22,7 @@ const INPUT_HOVER =
 
 const CELL_CLASSES: Record<CellState, string> = {
   neutral:
-    'border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-800',
+    'border-slate-400 bg-slate-100 dark:border-slate-700 dark:bg-slate-800',
   lit: 'border-sky-400 bg-sky-400 shadow-[0_0_16px_rgba(56,189,248,0.7)] motion-safe:animate-pop dark:border-sky-300 dark:bg-sky-300',
   selected: 'border-sky-600 bg-sky-500 dark:border-sky-400 dark:bg-sky-600',
   correct:
@@ -130,7 +130,7 @@ export function Grid({
       role="group"
       aria-label="Memory matrix"
       onKeyDown={handleKeyDown}
-      className={`mx-auto grid aspect-square w-[min(100%,56vh)] content-center gap-1 rounded-xl bg-slate-200/60 p-1 select-none sm:gap-2 sm:p-2 dark:bg-slate-800/60 md:w-[min(100%,560px,70vh)]${shakeClass}`}
+      className={`mx-auto grid aspect-square w-[min(100%,56vh)] content-center gap-1 rounded-xl bg-slate-300 p-1 select-none sm:gap-2 sm:p-2 dark:bg-slate-950 md:w-[min(100%,560px,70vh)]${shakeClass}`}
       style={{
         gridTemplateColumns: track,
         gridTemplateRows: `repeat(${String(gridSize)}, auto)`,

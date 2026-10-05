@@ -137,6 +137,19 @@ describe('Grid', () => {
     expect(screen.queryByText('✗')).not.toBeInTheDocument();
   });
 
+  it('reads as a tray that separates every tile', () => {
+    renderGrid();
+
+    const board = screen.getByRole('group').className.split(' ');
+    expect(board).toContain('bg-slate-300');
+    expect(board).toContain('dark:bg-slate-950');
+
+    const tiles = cell(1, 1).className.split(' ');
+    expect(tiles).toContain('bg-slate-100');
+    // The tile edge must stay visible against the darker tray.
+    expect(tiles).toContain('border-slate-400');
+  });
+
   it('keeps cells square inside the board', () => {
     renderGrid({ gridSize: 4 });
 
