@@ -31,21 +31,26 @@ type CellState =
   'neutral' | 'lit' | 'selected' | 'correct' | 'missed' | 'wrong';
 
 const BASE_CELL =
-  'flex aspect-square select-none items-center justify-center rounded-lg border-2 text-lg font-bold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:cursor-default';
+  'flex aspect-square select-none items-center justify-center rounded-lg text-lg font-bold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:cursor-default';
 
 const INPUT_AFFORDANCE =
   'cursor-pointer hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md dark:hover:border-sky-500';
 
 const CELL_CLASSES: Record<CellState, string> = {
   neutral:
-    'border-slate-400 bg-slate-100 dark:border-slate-700 dark:bg-slate-800',
-  lit: 'border-sky-400 bg-sky-400 shadow-[0_0_16px_rgba(56,189,248,0.7)] motion-safe:animate-pop dark:border-sky-300 dark:bg-sky-300',
-  selected: 'border-sky-600 bg-sky-500 dark:border-sky-400 dark:bg-sky-600',
+    'border-2 border-slate-400 bg-slate-100 dark:border-slate-700 dark:bg-slate-800',
+  lit: 'border-2 border-sky-400 bg-sky-400 shadow-[0_0_16px_rgba(56,189,248,0.7)] motion-safe:animate-pop dark:border-sky-300 dark:bg-sky-300',
+  selected:
+    'border-2 border-sky-600 bg-sky-500 dark:border-sky-400 dark:bg-sky-600',
   correct:
-    'border-green-500 bg-green-500 dark:border-green-400 dark:bg-green-500',
+    'border-2 border-green-500 bg-green-500 dark:border-green-400 dark:bg-green-500',
+  // A pale fill reads as "hollow" against the solid green of a correct pick,
+  // so the dashed 4px outline carries the signal: the fill alone sits at
+  // 1.05:1 against an untouched tile and is effectively invisible.
   missed:
-    'border-green-500 bg-green-50 dark:border-green-400 dark:bg-green-900/40',
-  wrong: 'border-red-500 bg-red-500 dark:border-red-400 dark:bg-red-600',
+    'border-4 border-dashed border-green-600 bg-green-100 dark:border-green-300 dark:bg-green-900/40',
+  wrong:
+    'border-2 border-red-500 bg-red-500 dark:border-red-400 dark:bg-red-600',
 };
 
 /**

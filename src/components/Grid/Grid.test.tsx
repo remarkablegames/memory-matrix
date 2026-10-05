@@ -184,6 +184,28 @@ describe('Grid', () => {
     expect(screen.getByText('✗')).toBeInTheDocument();
   });
 
+  it('marks a missed tile with structure, not just a pale fill', () => {
+    renderGrid({
+      phase: 'feedback',
+      result: 'wrong',
+      pattern: [0, 1, 2],
+      selection: [0, 1, 3],
+    });
+
+    const missed = cell(1, 3).className.split(' ');
+
+    // The fill sits at ~1.05:1 against an untouched tile, so the dashed
+    // 4px outline is what actually marks the cell.
+    expect(missed).toContain('border-dashed');
+    expect(missed).toContain('border-4');
+    expect(missed).toContain('border-green-600');
+
+    // A correct pick stays solid, so hollow-vs-solid survives without color.
+    const correct = cell(1, 1).className.split(' ');
+    expect(correct).not.toContain('border-dashed');
+    expect(correct).toContain('bg-green-500');
+  });
+
   it('shows all cells correct after a clean pick', () => {
     renderGrid({
       phase: 'feedback',
