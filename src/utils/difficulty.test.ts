@@ -11,6 +11,7 @@ import {
   MAX_REVEAL_MS,
   MIN_GRID,
   START_TIME_MS,
+  TIME_BONUS_BASE_MS,
   WARNING_MS,
 } from './difficulty';
 
@@ -67,13 +68,30 @@ describe('getRevealDuration', () => {
 });
 
 describe('getTimeBonus', () => {
-  it('grants larger bonuses on later rounds', () => {
-    expect(getTimeBonus(1)).toBeLessThan(getTimeBonus(6));
+  it('pays little on the easy opening rounds', () => {
+    expect(getTimeBonus(1)).toBe(TIME_BONUS_BASE_MS);
+    expect(TIME_BONUS_BASE_MS).toBe(3_000);
   });
 
-  it('caps the bonus', () => {
+  it('holds flat while the span is unchanged', () => {
+    // Rounds 1-3 all ask for 3 tiles on a 3x3 board.
+    expect(getTimeBonus(2)).toBe(getTimeBonus(1));
+    expect(getTimeBonus(3)).toBe(getTimeBonus(1));
+
+    // Rounds 4-6 all ask for 6 tiles on a 4x4 board.
+    expect(getTimeBonus(5)).toBe(getTimeBonus(4));
+    expect(getTimeBonus(6)).toBe(getTimeBonus(4));
+  });
+
+  it('grows with the span of the pattern', () => {
+    expect(getTimeBonus(7)).toBeGreaterThan(getTimeBonus(6));
+    expect(getTimeBonus(13)).toBeGreaterThan(getTimeBonus(10));
+    expect(getTimeBonus(15)).toBeGreaterThan(getTimeBonus(7));
+  });
+
+  it('caps the bonus at the hardest pattern', () => {
     expect(getTimeBonus(99)).toBe(MAX_BONUS_MS);
-    expect(MAX_BONUS_MS).toBe(12000);
+    expect(MAX_BONUS_MS).toBe(11_000);
   });
 });
 
