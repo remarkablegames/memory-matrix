@@ -1,8 +1,24 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { Phase, Result } from 'src/types/game';
+import { type } from 'websfx';
 
 import { Grid } from './Grid';
+
+vi.mock('websfx');
+
+function stubPointer(matches: boolean): void {
+  vi.stubGlobal('matchMedia', (query: string): MediaQueryList => ({
+    matches,
+    media: query,
+    onchange: null,
+    addListener: () => undefined,
+    removeListener: () => undefined,
+    addEventListener: () => undefined,
+    removeEventListener: () => undefined,
+    dispatchEvent: () => false,
+  }));
+}
 
 interface GridOverrides {
   gridSize?: number;
@@ -36,6 +52,50 @@ function cell(row: number, column: number): HTMLElement {
 }
 
 describe('Grid', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.clearAllMocks();
+  });
+
+  it('ticks when a hovering pointer enters a tile during input', () => {
+    stubPointer(true);
+    renderGrid({ phase: 'input' });
+
+    fireEvent.mouseEnter(cell(2, 2));
+    fireEvent.mouseEnter(cell(3, 3));
+    expect(type).toHaveBeenCalledTimes(2);
+  });
+
+  it('stays silent on touch devices and outside input', () => {
+    stubPointer(false);
+    const { rerender } = renderGrid({ phase: 'input' });
+
+    fireEvent.mouseEnter(cell(1, 1));
+    expect(type).not.toHaveBeenCalled();
+
+    rerender(
+      <Grid
+        gridSize={3}
+        pattern={[0, 1, 2]}
+        selection={[]}
+        phase="showing"
+        result={null}
+        onToggle={vi.fn()}
+      />,
+    );
+    fireEvent.mouseEnter(cell(1, 1));
+
+    expect(type).not.toHaveBeenCalled();
+  });
+
+  it('stays silent when the browser has no pointer query', () => {
+    renderGrid({ phase: 'input' });
+
+    fireEvent.mouseEnter(cell(2, 2));
+
+    expect(type).not.toHaveBeenCalled();
+  });
+
   it('renders one cell per grid position', () => {
     renderGrid();
 
@@ -165,12 +225,15 @@ describe('Grid', () => {
     expect(cell(1, 1).className.split(' ')).toContain('aspect-square');
   });
 
-  it('adds hover affordances during input only', () => {
+  it('adds pointer and hover affordances during input only', () => {
     const { rerender } = renderGrid({ phase: 'input' });
 
-    expect(cell(1, 1).className.split(' ')).toContain('hover:-translate-y-0.5');
-    expect(cell(1, 1).className.split(' ')).toContain('bg-slate-100');
+    const tokens = cell(1, 1).className.split(' ');
+    expect(tokens).toContain('cursor-pointer');
+    expect(tokens).toContain('hover:-translate-y-0.5');
+    expect(tokens).toContain('bg-slate-100');
 
+    // Tiles are disabled outside input, so they must not look clickable.
     rerender(
       <Grid
         gridSize={3}
@@ -182,9 +245,9 @@ describe('Grid', () => {
       />,
     );
 
-    expect(cell(1, 1).className.split(' ')).not.toContain(
-      'hover:-translate-y-0.5',
-    );
+    const idle = cell(1, 1).className.split(' ');
+    expect(idle).not.toContain('cursor-pointer');
+    expect(idle).not.toContain('hover:-translate-y-0.5');
   });
 
   it('renders plain cells outside of play', () => {

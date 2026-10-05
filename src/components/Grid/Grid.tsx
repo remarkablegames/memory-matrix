@@ -1,6 +1,22 @@
 import type { KeyboardEvent } from 'react';
 import { useRef } from 'react';
 import type { Phase, Result } from 'src/types/game';
+import { type } from 'websfx';
+
+const HOVER_SOUND_QUERY = '(hover: hover) and (pointer: fine)';
+
+/**
+ * Reports whether the device has a real hovering pointer. Touch devices
+ * emulate :hover on tap, which would double up with the click cue.
+ *
+ * @returns Whether hover cues should play.
+ */
+function canHover(): boolean {
+  return (
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia(HOVER_SOUND_QUERY).matches
+  );
+}
 
 export interface GridProps {
   gridSize: number;
@@ -17,8 +33,8 @@ type CellState =
 const BASE_CELL =
   'flex aspect-square select-none items-center justify-center rounded-lg border-2 text-lg font-bold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:cursor-default';
 
-const INPUT_HOVER =
-  'hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md dark:hover:border-sky-500';
+const INPUT_AFFORDANCE =
+  'cursor-pointer hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md dark:hover:border-sky-500';
 
 const CELL_CLASSES: Record<CellState, string> = {
   neutral:
@@ -121,7 +137,8 @@ export function Grid({
   }
 
   const shakeClass = result === 'wrong' ? ' motion-safe:animate-shake' : '';
-  const inputClass = phase === 'input' ? ` ${INPUT_HOVER}` : '';
+  const inputClass = phase === 'input' ? ` ${INPUT_AFFORDANCE}` : '';
+  const hoverCue = phase === 'input' && canHover();
   const track = `repeat(${String(gridSize)}, minmax(0, 1fr))`;
 
   return (
@@ -159,6 +176,11 @@ export function Grid({
             }
             onClick={() => {
               onToggle(index);
+            }}
+            onMouseEnter={() => {
+              if (hoverCue) {
+                type();
+              }
             }}
           >
             {state === 'wrong' ? '✗' : null}
