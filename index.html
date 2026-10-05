@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="logo.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="logo.svg" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="src/style.css" />
@@ -14,9 +17,9 @@
     />
     <title>Memory Matrix | remarkablegames</title>
   </head>
-  <body class="flex min-h-screen min-w-80 place-items-center dark:bg-slate-900">
+  <body class="min-h-dvh">
     <noscript>You need to enable JavaScript to play this game.</noscript>
-    <div class="mx-auto" id="root"></div>
+    <div class="w-full" id="root"></div>
     <script type="module" src="src/main.tsx"></script>
   </body>
 </html>
