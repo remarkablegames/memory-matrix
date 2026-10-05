@@ -1,4 +1,4 @@
-export const HOVER_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
+const HOVER_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
 
 /**
  * Reports whether the device has a real hovering pointer. Touch devices

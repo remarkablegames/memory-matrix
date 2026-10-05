@@ -1,21 +1,21 @@
 export const MIN_GRID = 3;
 export const MAX_GRID = 7;
-export const GRID_GROWTH_INTERVAL = 3;
-export const PATTERN_BASE = 2;
-export const PATTERN_GRID_RATIO = 0.4;
+const GRID_GROWTH_INTERVAL = 3;
+const PATTERN_BASE = 2;
+const PATTERN_GRID_RATIO = 0.4;
 
 export const START_TIME_MS = 60_000;
 export const WARNING_MS = 10_000;
 export const TICK_MS = 100;
 export const TIME_BONUS_BASE_MS = 3_000;
-export const TIME_BONUS_PER_EXTRA_TILE_MS = 500;
+const TIME_BONUS_PER_EXTRA_TILE_MS = 500;
 export const MAX_BONUS_MS = 11_000;
 
 export const LOCK_IN_MS = 300;
 export const FEEDBACK_CORRECT_MS = 1_000;
 export const FEEDBACK_WRONG_MS = 1_600;
-export const REVEAL_BASE_MS = 900;
-export const REVEAL_PER_TILE_MS = 200;
+const REVEAL_BASE_MS = 900;
+const REVEAL_PER_TILE_MS = 200;
 export const MAX_REVEAL_MS = 2_500;
 
 /**
