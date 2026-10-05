@@ -15,7 +15,7 @@ type CellState =
   'neutral' | 'lit' | 'selected' | 'correct' | 'missed' | 'wrong';
 
 const BASE_CELL =
-  'flex select-none items-center justify-center rounded-lg border-2 text-lg font-bold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:cursor-default';
+  'flex aspect-square select-none items-center justify-center rounded-lg border-2 text-lg font-bold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:cursor-default';
 
 const INPUT_HOVER =
   'hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md dark:hover:border-sky-500';
@@ -130,10 +130,10 @@ export function Grid({
       role="group"
       aria-label="Memory matrix"
       onKeyDown={handleKeyDown}
-      className={`mx-auto grid aspect-[4/5] w-[min(100%,56vh)] gap-1.5 rounded-xl bg-slate-200/60 p-2 select-none sm:gap-2 md:aspect-square dark:bg-slate-800/60 md:w-[min(100%,560px,70vh)]${shakeClass}`}
+      className={`mx-auto grid aspect-square w-[min(100%,56vh)] content-center gap-1 rounded-xl bg-slate-200/60 p-1 select-none sm:gap-2 sm:p-2 dark:bg-slate-800/60 md:w-[min(100%,560px,70vh)]${shakeClass}`}
       style={{
         gridTemplateColumns: track,
-        gridTemplateRows: track,
+        gridTemplateRows: `repeat(${String(gridSize)}, auto)`,
       }}
     >
       {cells.map((index) => {

@@ -137,6 +137,21 @@ describe('Grid', () => {
     expect(screen.queryByText('✗')).not.toBeInTheDocument();
   });
 
+  it('keeps cells square inside the board', () => {
+    renderGrid({ gridSize: 4 });
+
+    const grid = screen.getByRole('group');
+    const classes = grid.className.split(' ');
+    expect(classes).toContain('aspect-square');
+    // No ad-hoc aspect ratios: the board is square and hugs the tiles.
+    expect(classes.filter((name) => name.startsWith('aspect-['))).toHaveLength(
+      0,
+    );
+    expect(classes).toContain('content-center');
+    expect(grid.style.gridTemplateRows).toBe('repeat(4, auto)');
+    expect(cell(1, 1).className.split(' ')).toContain('aspect-square');
+  });
+
   it('adds hover affordances during input only', () => {
     const { rerender } = renderGrid({ phase: 'input' });
 

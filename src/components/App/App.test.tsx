@@ -66,8 +66,11 @@ describe('App', () => {
 
   it('suppresses double-tap zoom on the play surface', () => {
     const { container } = render(<App />);
+    const main = container.querySelector('main');
 
-    expect(container.querySelector('main')).toHaveClass('touch-manipulation');
+    expect(main).toHaveClass('touch-manipulation');
+    // Tight page padding keeps 7x7 tiles at or above 44pt on small phones.
+    expect(main).toHaveClass('px-2');
   });
 
   it('applies the stored volume on mount', () => {
