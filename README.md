@@ -8,9 +8,7 @@
 [![test](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/remarkablegames/memory-matrix/graph/badge.svg?token=IqRfA9X3VC)](https://codecov.io/gh/remarkablegames/memory-matrix)
 
-🧩 Train your brain with **Memory Matrix**.
-
-**Memory Matrix** is a fast-paced brain-training game that challenges you to remember and recreate patterns on a changing grid. Test your focus, sharpen your memory, and see how far you can go as the matrix grows more challenging.
+🧩 **Memory Matrix** is a fast-paced brain-training game that challenges you to remember and recreate patterns on a changing grid. Test your focus, sharpen your memory, and see how far you can go as the matrix grows more challenging.
 
 ## Play
 
