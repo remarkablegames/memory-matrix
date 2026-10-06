@@ -10,6 +10,8 @@
 
 🧩 <kbd>Memory Matrix</kbd> is a spatial memory game where you recreate a pattern of tiles from memory.
 
+Read the [blog post](https://remarkablegames.org/posts/memory-matrix/).
+
 ## Play
 
 Play in your browser:
