@@ -39,7 +39,7 @@ Choose a mode from the menu:
 - **Classic**: One mistake ends the run.
 - **Timed**: Start with 60 seconds. Each cleared round adds time, with harder rounds rewarding extra time. A mistake costs time instead of ending the run.
 
-### Accessibility
+## Accessibility
 
 - Fully playable with a keyboard. Use **Tab** to navigate cells, the arrow keys to move, and **Enter** or **Space** to select.
 - Screen readers announce the target count—for example, "Recall 5 tiles"—as well as the current round and remaining time.
