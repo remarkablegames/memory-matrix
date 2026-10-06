@@ -8,7 +8,7 @@
 [![test](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablegames/memory-matrix/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/remarkablegames/memory-matrix/graph/badge.svg?token=IqRfA9X3VC)](https://codecov.io/gh/remarkablegames/memory-matrix)
 
-🧩 **Memory Matrix** is a fast-paced brain-training game that challenges you to remember and recreate patterns on a changing grid. Test your focus, sharpen your memory, and see how far you can go as the matrix grows more challenging.
+🧩 <kbd>Memory Matrix</kbd> is a spatial memory game where you recreate a pattern of tiles from memory.
 
 ## Play
 
@@ -26,22 +26,20 @@ Or download for desktop:
 
 ## How to Play
 
-A set of tiles will light up briefly. Then, tap the tiles from memory.
+1. **Watch:** A set of tiles lights up. Memorize their positions.
+2. **Recall:** Select the tiles that lit up. The game checks your selection automatically once you've selected the required number of tiles.
+3. **Climb:** Clear a round to expand the grid and increase the difficulty.
 
-1. Watch the pattern appear.
-2. Tap the tiles you remember. Your answer is automatically checked once you've selected the same number of tiles that lit up.
-3. The grid size and pattern difficulty increase as you clear rounds.
+## Features
 
-Choose a mode from the menu:
-
-- **Classic**: One mistake ends the run.
-- **Timed**: Start with 60 seconds. Each cleared round adds time, with harder rounds rewarding extra time. A mistake costs time instead of ending the run.
-
-## Accessibility
-
-- Fully playable with a keyboard. Use **Tab** to navigate cells, the arrow keys to move, and **Enter** or **Space** to select.
-- Screen readers announce the target count—for example, "Recall 5 tiles"—as well as the current round and remaining time.
-- Dark mode follows your system preference, and animations are disabled when reduced motion is enabled.
+- **2 modes:**
+  - **Classic:** A mistake ends the run.
+  - **Timed:** Start with 60 seconds and gain time after each cleared round. The run ends when time runs out.
+- **Increasing difficulty:** The grid expands from 3×3 to 7×7 and the pattern grows along with it.
+- **Controls:** Click or tap a tile, or move around the grid with the arrow keys and select tiles by pressing **Enter** or **Space**.
+- **Accessibility:** The level, number of tiles to recall, timer, and results are announced to screen readers.
+- **Theme:** The game follows your system's light or dark theme and disables animations when reduced motion is enabled.
+- **Small footprint:** The game is under 10 kB gzipped.
 
 ## Install
 
